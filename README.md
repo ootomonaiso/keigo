@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 敬語チャット 🎌
 
-## Getting Started
+気軽に敬語を練習できるチャットアプリです！面倒なビジネス設定とかなしで、楽しく敬語のネタで遊びましょう〜
 
-First, run the development server:
+## � 特徴
+
+- **シンプルなチャット**: 難しい設定なし、すぐに始められる
+- **面白いネタ提供**: コンビニ敬語、ファミレス敬語など日常ネタ
+- **自動スコア判定**: 敬語を使うと自動で採点
+- **お題ランダム**: 「ネタちょうだい」で適当にお題を出す
+
+## 🚀 すぐ始める
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[http://localhost:3000](http://localhost:3000) を開いて「ネタちょうだい」と言ってみて！
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🎲 遊び方
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **「ネタちょうだい」** → ランダムで敬語のお題が出る
+2. **敬語で答える** → 自動で種類とスコアを判定
+3. **繰り返す** → 楽しく敬語が身につく！
 
-## Learn More
+## 🤖 お題の例
 
-To learn more about Next.js, take a look at the following resources:
+- コンビニで「温めますか？」を敬語で言ってみて
+- ファミレスでお客様をお迎えする一言は？
+- 電話に出るとき「はい、○○です」より丁寧に
+- エレベーターで上司に「お疲れ様」以外の挨拶
+- メールで「ありがとうございました」より丁寧に
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 💡 便利機能
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **クイックボタン**: よく使う敬語をワンクリック
+- **絵文字判定**: 尊敬語👑、謙譲語🙇‍♂️、丁寧語😊
+- **スコア表示**: 緑(80点以上)、黄(70点以上)、赤(70点未満)
 
-## Deploy on Vercel
+## �️ 技術
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Next.js 15 + TypeScript + Tailwind CSS
+- シンプルな敬語判定ロジック（AI不要）
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+面倒な設定は一切なし！気軽に敬語で遊ぼう〜
