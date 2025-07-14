@@ -56,6 +56,8 @@ export function ChatInterface() {
   const [messages, setMessages] = useState<Message[]>([])
   const [inputText, setInputText] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [aiTopics, setAiTopics] = useState<typeof KEIGO_TOPICS>([])
+  const [isGeneratingTopic, setIsGeneratingTopic] = useState(false)
 
   // Hydration問題を解決するため、useEffectで初期メッセージを設定
   useEffect(() => {
@@ -70,7 +72,38 @@ export function ChatInterface() {
   }, [])
 
   const getRandomTopic = () => {
-    return KEIGO_TOPICS[Math.floor(Math.random() * KEIGO_TOPICS.length)]
+    // AIで生成されたトピックがあれば優先的に使用
+    const allTopics = aiTopics.length > 0 ? [...KEIGO_TOPICS, ...aiTopics] : KEIGO_TOPICS
+    return allTopics[Math.floor(Math.random() * allTopics.length)]
+  }
+
+  const generateAITopic = async () => {
+    setIsGeneratingTopic(true)
+    try {
+      const response = await fetch('/api/generate-topic', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          existingTopics: [...KEIGO_TOPICS, ...aiTopics].map(t => t.topic)
+        })
+      })
+
+      if (response.ok) {
+        const newTopic = await response.json()
+        setAiTopics(prev => [...prev, newTopic])
+        return newTopic
+      } else {
+        // フォールバック
+        return getRandomTopic()
+      }
+    } catch (error) {
+      console.error('AI topic generation failed:', error)
+      return getRandomTopic()
+    } finally {
+      setIsGeneratingTopic(false)
+    }
   }
 
   const analyzeKeigo = async (text: string): Promise<KeigoAnalysis | null> => {
@@ -107,8 +140,24 @@ export function ChatInterface() {
     
     // ネタリクエスト
     if (input.includes('ネタ') || input.includes('お題') || input.includes('問題') || input.includes('ちょうだい')) {
-      const topic = getRandomTopic()
-      return `【${topic.topic}】\n\n${topic.question}\n\n💡 ${topic.hint}`
+      // ランダムでAI生成かプリセットかを選択
+      const useAI = Math.random() < 0.3 // 30%の確率でAI生成
+      if (useAI && !isGeneratingTopic) {
+        // AI生成トピックを非同期で取得
+        generateAITopic().then(topic => {
+          const aiMessage: Message = {
+            id: (Date.now() + 2).toString(),
+            content: `🤖 **AI生成トピック**\n\n【${topic.topic}】\n\n${topic.question}\n\n💡 ${topic.hint}`,
+            sender: 'assistant',
+            timestamp: new Date()
+          }
+          setMessages(prev => [...prev, aiMessage])
+        })
+        return '🤖 AIが新しいトピックを考えています...'
+      } else {
+        const topic = getRandomTopic()
+        return `【${topic.topic}】\n\n${topic.question}\n\n💡 ${topic.hint}`
+      }
     }
     
     // 挨拶
@@ -270,12 +319,32 @@ export function ChatInterface() {
             </div>
             
             {/* クイックボタン */}
-            <div className="flex gap-2 mt-2">
+            <div className="flex gap-2 mt-2 flex-wrap">
               <button
                 onClick={() => setInputText('ネタちょうだい')}
                 className="text-sm bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-full text-black"
               >
                 🎲 ネタちょうだい
+              </button>
+              <button
+                onClick={async () => {
+                  if (!isGeneratingTopic) {
+                    setIsLoading(true)
+                    const topic = await generateAITopic()
+                    const aiMessage: Message = {
+                      id: Date.now().toString(),
+                      content: `🤖 **AI生成トピック**\n\n【${topic.topic}】\n\n${topic.question}\n\n💡 ${topic.hint}`,
+                      sender: 'assistant',
+                      timestamp: new Date()
+                    }
+                    setMessages(prev => [...prev, aiMessage])
+                    setIsLoading(false)
+                  }
+                }}
+                disabled={isGeneratingTopic || isLoading}
+                className="text-sm bg-purple-200 hover:bg-purple-300 px-3 py-1 rounded-full text-black disabled:opacity-50"
+              >
+                🤖 AIトピック {isGeneratingTopic ? '生成中...' : ''}
               </button>
               <button
                 onClick={() => setInputText('いつもお世話になっております')}
