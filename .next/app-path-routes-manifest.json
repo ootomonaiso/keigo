@@ -1,0 +1,9 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/api/generate-topic/route": "/api/generate-topic",
+  "/favicon.ico/route": "/favicon.ico",
+  "/api/test-gemini/route": "/api/test-gemini",
+  "/api/analyze/route": "/api/analyze",
+  "/api/score-keigo/route": "/api/score-keigo",
+  "/page": "/"
+}
