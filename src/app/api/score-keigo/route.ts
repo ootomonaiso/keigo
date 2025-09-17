@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
     const prompt = `
-以下のユーザーの敬語表現を詳しく採点してください。
+以下のユーザーの敬語表現をていねいに詳しく採点してください。
 
 【ユーザーの入力】
 "${userText}"
