@@ -25,7 +25,7 @@ export async function POST(request: Request) {
 【文脈・シチュエーション】
 ${context || '一般的なビジネス・接客シーン'}
 
-以下のJSON形式で回答してください：
+以下のJSON形式で回答してください（必ず「正しい敬語表現例」を含めてください）：
 {
   "score": 85,
   "category": "謙譲語",
@@ -34,7 +34,8 @@ ${context || '一般的なビジネス・接客シーン'}
   "goodPoints": ["良い点1", "良い点2"],
   "improvements": ["改善点1", "改善点2"],
   "betterExpressions": ["より良い表現1", "より良い表現2"],
-  "grammarCheck": "文法的な指摘があれば"
+  "grammarCheck": "文法的な指摘があれば",
+  "correctExample": "最も正しい敬語表現例"
 }
 
 採点基準：

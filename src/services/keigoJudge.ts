@@ -83,13 +83,14 @@ class KeigoJudgeService {
 文章: "${data.userInput}"
 状況: ${data.situation}
 
-以下のJSON形式で簡潔に回答してください：
+以下のJSON形式で簡潔に回答してください（必ず「正しい敬語表現例」を含めてください）：
 {
   "isCorrect": true/false,
   "category": "尊敬語"/"謙譲語"/"丁寧語"/"普通語"/"不適切",
   "score": 0-100の数値,
   "explanation": "簡潔な説明（50文字以内）",
-  "suggestion": "改善提案（あれば）"
+  "suggestion": "改善提案（あれば）",
+  "correctExample": "最も正しい敬語表現例"
 }
 `;
   }
