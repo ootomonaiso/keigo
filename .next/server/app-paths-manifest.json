@@ -1,9 +1,9 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/api/generate-topic/route": "app/api/generate-topic/route.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/api/test-gemini/route": "app/api/test-gemini/route.js",
   "/api/analyze/route": "app/api/analyze/route.js",
+  "/api/generate-topic/route": "app/api/generate-topic/route.js",
   "/api/score-keigo/route": "app/api/score-keigo/route.js",
+  "/api/test-gemini/route": "app/api/test-gemini/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
   "/page": "app/page.js"
 }

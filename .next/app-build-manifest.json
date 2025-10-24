@@ -7,13 +7,12 @@
       "static/chunks/main-app-89e5ce23be439ac2.js",
       "static/chunks/app/_not-found/page-5bfe245ad955586d.js"
     ],
-    "/layout": [
+    "/api/analyze/route": [
       "static/chunks/webpack-eb71753252589347.js",
       "static/chunks/4bd1b696-52a6696c08e3276c.js",
       "static/chunks/684-d252a3b20a10e7f9.js",
       "static/chunks/main-app-89e5ce23be439ac2.js",
-      "static/css/b4b2cce74942efe8.css",
-      "static/chunks/app/layout-f2f64ff5e67d921a.js"
+      "static/chunks/app/api/analyze/route-65f1b90f2bbcc452.js"
     ],
     "/api/generate-topic/route": [
       "static/chunks/webpack-eb71753252589347.js",
@@ -22,6 +21,13 @@
       "static/chunks/main-app-89e5ce23be439ac2.js",
       "static/chunks/app/api/generate-topic/route-0222d178c5b92627.js"
     ],
+    "/api/score-keigo/route": [
+      "static/chunks/webpack-eb71753252589347.js",
+      "static/chunks/4bd1b696-52a6696c08e3276c.js",
+      "static/chunks/684-d252a3b20a10e7f9.js",
+      "static/chunks/main-app-89e5ce23be439ac2.js",
+      "static/chunks/app/api/score-keigo/route-605b5e216bd9cf17.js"
+    ],
     "/api/test-gemini/route": [
       "static/chunks/webpack-eb71753252589347.js",
       "static/chunks/4bd1b696-52a6696c08e3276c.js",
@@ -29,19 +35,13 @@
       "static/chunks/main-app-89e5ce23be439ac2.js",
       "static/chunks/app/api/test-gemini/route-6cee520e5a02317c.js"
     ],
-    "/api/analyze/route": [
+    "/layout": [
       "static/chunks/webpack-eb71753252589347.js",
       "static/chunks/4bd1b696-52a6696c08e3276c.js",
       "static/chunks/684-d252a3b20a10e7f9.js",
       "static/chunks/main-app-89e5ce23be439ac2.js",
-      "static/chunks/app/api/analyze/route-65f1b90f2bbcc452.js"
-    ],
-    "/api/score-keigo/route": [
-      "static/chunks/webpack-eb71753252589347.js",
-      "static/chunks/4bd1b696-52a6696c08e3276c.js",
-      "static/chunks/684-d252a3b20a10e7f9.js",
-      "static/chunks/main-app-89e5ce23be439ac2.js",
-      "static/chunks/app/api/score-keigo/route-605b5e216bd9cf17.js"
+      "static/css/534c17db5b37c5b4.css",
+      "static/chunks/app/layout-07c5a2d9e55b5bd2.js"
     ],
     "/page": [
       "static/chunks/webpack-eb71753252589347.js",

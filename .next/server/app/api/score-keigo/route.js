@@ -1,5 +1,5 @@
-(()=>{var e={};e.id=496,e.ids=[496],e.modules={846:e=>{"use strict";e.exports=require("next/dist/compiled/next-server/app-page.runtime.prod.js")},1763:(e,r,t)=>{"use strict";t.r(r),t.d(r,{patchFetch:()=>x,routeModule:()=>u,serverHooks:()=>g,workAsyncStorage:()=>d,workUnitAsyncStorage:()=>l});var s={};t.r(s),t.d(s,{POST:()=>c});var o=t(6559),n=t(8088),i=t(7719),a=t(2190),p=t(7449);async function c(e){try{let{userText:r,context:t}=await e.json(),s=process.env.GOOGLE_GENERATIVE_AI_API_KEY;if(!s)return a.NextResponse.json({error:"API Keyが設定されていません"},{status:500});let o=new p.ij(s).getGenerativeModel({model:"gemini-1.5-flash"}),n=`
-以下のユーザーの敬語表現を詳しく採点してください。
+(()=>{var e={};e.id=496,e.ids=[496],e.modules={846:e=>{"use strict";e.exports=require("next/dist/compiled/next-server/app-page.runtime.prod.js")},1763:(e,r,t)=>{"use strict";t.r(r),t.d(r,{patchFetch:()=>g,routeModule:()=>u,serverHooks:()=>x,workAsyncStorage:()=>d,workUnitAsyncStorage:()=>l});var s={};t.r(s),t.d(s,{POST:()=>c});var o=t(6559),n=t(8088),i=t(7719),a=t(2190),p=t(7449);async function c(e){let{userText:r,context:t}=await e.json();try{let e=process.env.GOOGLE_GENERATIVE_AI_API_KEY;if(!e)return a.NextResponse.json({error:"API Keyが設定されていません"},{status:500});let s=process.env.GENERATIVE_MODEL||"models/gemini-2.5-flash",o=new p.ij(e).getGenerativeModel({model:s}),n=`
+以下のユーザーの敬語表現をていねいに詳しく採点してください。
 
 【ユーザーの入力】
 "${r}"
@@ -7,7 +7,7 @@
 【文脈・シチュエーション】
 ${t||"一般的なビジネス・接客シーン"}
 
-以下のJSON形式で回答してください：
+以下のJSON形式で回答してください（必ず「正しい敬語表現例」を含めてください）：
 {
   "score": 85,
   "category": "謙譲語",
@@ -16,7 +16,8 @@ ${t||"一般的なビジネス・接客シーン"}
   "goodPoints": ["良い点1", "良い点2"],
   "improvements": ["改善点1", "改善点2"],
   "betterExpressions": ["より良い表現1", "より良い表現2"],
-  "grammarCheck": "文法的な指摘があれば"
+  "grammarCheck": "文法的な指摘があれば",
+  "correctExample": "最も正しい敬語表現例"
 }
 
 採点基準：
@@ -36,4 +37,4 @@ ${t||"一般的なビジネス・接客シーン"}
 - improvementsは改善点（配列）
 - betterExpressionsはより良い表現の提案（配列）
 - grammarCheckは文法的な問題があれば指摘（なければ空文字）
-`,i=(await o.generateContent(n)).response.text().match(/\{[\s\S]*\}/);if(i){let e=JSON.parse(i[0]);return a.NextResponse.json(e)}throw Error("Invalid response format")}catch(u){console.error("AI keigo scoring error:",u);let{userText:r}=await e.json(),t=r.includes("です")||r.includes("ます")||r.includes("ございます"),s=r.includes("いらっしゃる")||r.includes("なさる")||r.includes("れる")||r.includes("られる"),o=r.includes("申し上げ")||r.includes("させていただ")||r.includes("伺")||r.includes("拝見"),n=30,i="普通語",p=!1;o?(n=85,i="謙譲語",p=!0):s?(n=85,i="尊敬語",p=!0):t&&(n=70,i="丁寧語",p=!0);let c={score:n,category:i,isCorrect:p,explanation:`${i}が使われています。${p?"適切な敬語表現です。":"もう少し丁寧な表現を心がけましょう。"}`,goodPoints:p?[`${i}を適切に使用`]:[],improvements:p?[]:["「です・ます」を使ってより丁寧に"],betterExpressions:[],grammarCheck:""};return a.NextResponse.json(c)}}let u=new o.AppRouteRouteModule({definition:{kind:n.RouteKind.APP_ROUTE,page:"/api/score-keigo/route",pathname:"/api/score-keigo",filename:"route",bundlePath:"app/api/score-keigo/route"},resolvedPagePath:"C:\\00pro\\keigo\\src\\app\\api\\score-keigo\\route.ts",nextConfigOutput:"",userland:s}),{workAsyncStorage:d,workUnitAsyncStorage:l,serverHooks:g}=u;function x(){return(0,i.patchFetch)({workAsyncStorage:d,workUnitAsyncStorage:l})}},3033:e=>{"use strict";e.exports=require("next/dist/server/app-render/work-unit-async-storage.external.js")},3295:e=>{"use strict";e.exports=require("next/dist/server/app-render/after-task-async-storage.external.js")},4870:e=>{"use strict";e.exports=require("next/dist/compiled/next-server/app-route.runtime.prod.js")},6487:()=>{},8335:()=>{},9294:e=>{"use strict";e.exports=require("next/dist/server/app-render/work-async-storage.external.js")}};var r=require("../../../webpack-runtime.js");r.C(e);var t=e=>r(r.s=e),s=r.X(0,[447,580,449],()=>t(1763));module.exports=s})();
+`,i=(await o.generateContent(n)).response.text().match(/\{[\s\S]*\}/);if(i){let e=JSON.parse(i[0]);return a.NextResponse.json(e)}throw Error("Invalid response format")}catch(c){console.error("AI keigo scoring error:",c);let e=r.includes("です")||r.includes("ます")||r.includes("ございます"),t=r.includes("いらっしゃる")||r.includes("なさる")||r.includes("れる")||r.includes("られる"),s=r.includes("申し上げ")||r.includes("させていただ")||r.includes("伺")||r.includes("拝見"),o=30,n="普通語",i=!1;s?(o=85,n="謙譲語",i=!0):t?(o=85,n="尊敬語",i=!0):e&&(o=70,n="丁寧語",i=!0);let p={score:o,category:n,isCorrect:i,explanation:`${n}が使われています。${i?"適切な敬語表現です。":"もう少し丁寧な表現を心がけましょう。"}`,goodPoints:i?[`${n}を適切に使用`]:[],improvements:i?[]:["「です・ます」を使ってより丁寧に"],betterExpressions:[],grammarCheck:""};return a.NextResponse.json(p)}}let u=new o.AppRouteRouteModule({definition:{kind:n.RouteKind.APP_ROUTE,page:"/api/score-keigo/route",pathname:"/api/score-keigo",filename:"route",bundlePath:"app/api/score-keigo/route"},resolvedPagePath:"C:\\00pro\\keigo\\src\\app\\api\\score-keigo\\route.ts",nextConfigOutput:"",userland:s}),{workAsyncStorage:d,workUnitAsyncStorage:l,serverHooks:x}=u;function g(){return(0,i.patchFetch)({workAsyncStorage:d,workUnitAsyncStorage:l})}},3033:e=>{"use strict";e.exports=require("next/dist/server/app-render/work-unit-async-storage.external.js")},3295:e=>{"use strict";e.exports=require("next/dist/server/app-render/after-task-async-storage.external.js")},4870:e=>{"use strict";e.exports=require("next/dist/compiled/next-server/app-route.runtime.prod.js")},6487:()=>{},8335:()=>{},9294:e=>{"use strict";e.exports=require("next/dist/server/app-render/work-async-storage.external.js")}};var r=require("../../../webpack-runtime.js");r.C(e);var t=e=>r(r.s=e),s=r.X(0,[447,580,449],()=>t(1763));module.exports=s})();

@@ -25,15 +25,23 @@ class KeigoJudgeService {
       throw new Error('GOOGLE_GENERATIVE_AI_API_KEY is not set');
     }
     this.genAI = new GoogleGenerativeAI(apiKey);
-    this.model = this.genAI.getGenerativeModel({ 
-      model: 'gemini-1.5-pro',  // より安定したモデルに変更
-      generationConfig: {
-        temperature: 0.3,  // より一貫した結果のために温度を下げる
-        topK: 20,
-        topP: 0.8,
-        maxOutputTokens: 512,  // トークン数を制限してレスポンス時間を短縮
-      }
-    });
+
+    // 利用するモデル名は環境変数で指定できるようにする
+    const modelName = process.env.GENERATIVE_MODEL || 'models/gemini-2.5-flash';
+    try {
+      this.model = this.genAI.getGenerativeModel({
+        model: modelName,
+        generationConfig: {
+          temperature: 0.3,
+          topK: 20,
+          topP: 0.8,
+          maxOutputTokens: 512,
+        },
+      });
+    } catch (e) {
+      console.error('KeigoJudgeService: failed to initialize model', { modelName, error: e });
+      throw new Error(`failed to initialize model: ${modelName}`);
+    }
   }
 
   async analyzeKeigo(data: KeigoPromptData): Promise<KeigoAnalysis> {

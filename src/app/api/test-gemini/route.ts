@@ -16,8 +16,9 @@ export async function GET() {
     console.log('API Key exists:', !!apiKey);
     console.log('API Key length:', apiKey.length);
     
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+  const genAI = new GoogleGenerativeAI(apiKey);
+  const modelName = process.env.GENERATIVE_MODEL || 'models/gemini-2.5-flash';
+  const model = genAI.getGenerativeModel({ model: modelName });
 
     const startTime = Date.now();
     

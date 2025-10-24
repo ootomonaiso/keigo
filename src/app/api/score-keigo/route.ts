@@ -2,9 +2,10 @@ import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 export async function POST(request: Request) {
+  // リクエストボディを最初に1回だけ読み込む
+  const { userText, context } = await request.json();
+  
   try {
-    const { userText, context } = await request.json();
-    
     const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
     if (!apiKey) {
       return NextResponse.json(
@@ -13,8 +14,9 @@ export async function POST(request: Request) {
       );
     }
 
+    const modelName = process.env.GENERATIVE_MODEL || 'models/gemini-2.5-flash';
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = genAI.getGenerativeModel({ model: modelName });
 
     const prompt = `
 以下のユーザーの敬語表現をていねいに詳しく採点してください。
@@ -72,8 +74,7 @@ ${context || '一般的なビジネス・接客シーン'}
   } catch (error: unknown) {
     console.error('AI keigo scoring error:', error);
     
-    // フォールバック用の簡易採点
-    const { userText } = await request.json(); // userTextを再取得
+    // フォールバック用の簡易採点（最初に読み込んだuserTextを使用）
     const hasPolite = userText.includes('です') || userText.includes('ます') || userText.includes('ございます');
     const hasHonorific = userText.includes('いらっしゃる') || userText.includes('なさる') || userText.includes('れる') || userText.includes('られる');
     const hasHumble = userText.includes('申し上げ') || userText.includes('させていただ') || userText.includes('伺') || userText.includes('拝見');

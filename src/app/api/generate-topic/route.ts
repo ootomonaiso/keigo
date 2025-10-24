@@ -13,8 +13,9 @@ export async function POST(request: Request) {
       );
     }
 
+    const modelName = process.env.GENERATIVE_MODEL || 'models/gemini-2.5-flash';
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = genAI.getGenerativeModel({ model: modelName });
 
     const prompt = `
 日本語の敬語学習用の新しいトピックを1つ生成してください。
